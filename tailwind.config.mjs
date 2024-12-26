@@ -11,6 +11,11 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        montserrat: 'var(--font-montserrat)',
+        superbubble: 'var(--font-superbubble)',
+        tropicaltides: 'var(--font-tropicaltides)'
+      }
     },
   },
   plugins: [],

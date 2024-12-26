@@ -1,15 +1,19 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import localFont from 'next/font/local'
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"]
+})
+const superbubble = localFont({
+  src: '../../public/fonts/super_bubble/Super-Bubble.ttf',
+  variable: '--font-superbubble',
+})
+const tropicaltides = localFont({
+  src: '../../public/fonts/tropical_tides/Tropical-Tides.otf',
+  variable: '--font-tropicaltides',
+})
 
 export const metadata = {
   title: "Create Next App",
@@ -20,7 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${montserrat.variable} ${superbubble.variable} ${tropicaltides.variable} font-montserrat antialiased bg-[#E5FCFF]`}
       >
         {children}
       </body>
