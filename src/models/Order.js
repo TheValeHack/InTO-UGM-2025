@@ -6,7 +6,8 @@ const OrderSchema = new mongoose.Schema({
   participant_ids: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Participant' }],
   voucher_code: { type: String },
   total_price: { type: Number, required: true },
-  payment_status: { type: String, enum: ['pending', 'paid', 'canceled'], default: 'pending' },
+  payment_status: { type: String, default: null },
+  payment_token: {type: String, default: null},
   created_at: { type: Date, default: Date.now },
 });
 

@@ -6,11 +6,14 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CheckoutBox from "@/components/CheckoutBox";
 import paketData from "@/data/paket.json";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import PaymentPending from "@/components/PaymentPending";
 
 export default function PaketDewekan() {
   const paket = paketData.find((item) => item.id.toLowerCase() === "dewekan");
   const { data: session, status } = useSession();
+  const [lastOrder, setLastOrder] = useState({})
+  const [isLoadingPaymentStatus, setIsLoadingPaymentStatus] = useState(true)
   const isLoading = status === "loading";
   const router = useRouter();
 
@@ -18,9 +21,62 @@ export default function PaketDewekan() {
     if (!isLoading && !session) {
       router.push("/");
     }
+    const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js";
+    const clientKey = process.env.NEXT_PUBLIC_CLIENT;
+    const script = document.createElement("script");
+    script.src = snapScript;
+    script.setAttribute("data-client-key", clientKey);
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
   }, [isLoading, session, router]);
 
+  useEffect(() => {
+    const fetchTransactionDetails = async () => {
+      try {
+        const response = await fetch("/api/transactionsDetail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const transactionStatus = data.transactions.payment_status;
+
+          if (transactionStatus === "pending") {
+            setLastOrder(data.transactions)
+          } else if (transactionStatus === "paid") {
+            alert('udah beli paket')
+          }
+        } else {
+          console.log("Gagal mendapatkan status transaksi");
+        }
+        setIsLoadingPaymentStatus(false)
+      } catch (error) {
+        console.log("Terjadi kesalahan:", error);
+        setIsLoadingPaymentStatus(false)
+      }
+    };
+
+    if (session) {
+      fetchTransactionDetails();
+    }
+  }, [session, router]);
+
   if (isLoading) {
+    return (
+      <></>
+    );
+  }
+
+  if (isLoadingPaymentStatus) {
     return (
       <></>
     );
@@ -35,7 +91,11 @@ export default function PaketDewekan() {
             id="paket"
             className="w-full min-h-[75vh] py-32 flex flex-col justify-start items-center relative"
           >
-            <div className="px-6 md:px-12 lg:px-16 w-full relative">
+            {
+              lastOrder?.payment_status == "pending" ? (
+                <PaymentPending packageId={lastOrder?.package_id} token={lastOrder?.payment_token}  orderId={lastOrder?._id}/>
+              ) : (
+                <div className="px-6 md:px-12 lg:px-16 w-full relative">
               <div className="flex flex-col items-center gap-5">
                 <div className="flex flex-col items-center">
                   <div className="w-fit text-center font-superbubble flex items-center justify-center text-3xl sm:text-4xl md:text-5xl relative">
@@ -67,9 +127,11 @@ export default function PaketDewekan() {
                 name={paket.name}
                 desc={paket.desc}
                 price={paket.price}
-                validateParticipants={() => ''}
+                validateParticipants={() => ""}
               />
             </div>
+              )
+            }
           </section>
           <Footer />
         </div>

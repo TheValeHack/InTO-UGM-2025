@@ -83,7 +83,7 @@ export default function CheckoutBox({ className, name, desc, price, kode, valida
       const data = await response.json();
   
       if (response.ok && data.success) {
-        window.location.href = data.paymentUrl;
+        window.snap.pay(data.token)
       } else {
         alert(data.error || "Terjadi kesalahan saat memproses pembayaran.");
       }
@@ -109,12 +109,14 @@ export default function CheckoutBox({ className, name, desc, price, kode, valida
             </div>
             <form className="w-full" onSubmit={handleVoucherSubmit}>
               <label className="text-[10px] sm:text-base font-semibold text-[#B46632]">Masukkan Voucher</label>
-              <BubbleInput
-                type="text"
-                value={voucher}
-                onChange={handleVoucherChange}
-                placeholder="Kode voucher"
-              />
+              <div className="flex">
+                <BubbleInput
+                  type="text"
+                  value={voucher}
+                  onChange={handleVoucherChange}
+                  placeholder="Kode voucher"
+                />
+              </div>
               {voucherError && <div className="text-red-500 text-[10px] sm:text-base mt-2">{voucherError}</div>}
             </form>
             <div className="w-full text-[#B46632] text-[10px] sm:text-base">

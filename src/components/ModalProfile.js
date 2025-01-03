@@ -29,7 +29,6 @@ export default function ModalProfile({ className, state, setState, session }) {
   
       if (!response.ok) {
         if (response.status === 404) {
-          // Tidak ada paket aktif, anggap bukan error
           setActivePackage(null);
           return;
         }

@@ -32,7 +32,7 @@ export default function Testimoni({className, photo, name, testi, major, title})
                             "
                         </div>
                 </div>
-                <div className="text-[10px] sm:text-sm font-medium mt-7 sm:mt-9 text-justify">
+                <div className="text-[10px] sm:text-sm font-medium mt-7 sm:mt-9 text-justify text-black">
                 {testi}
                 </div>
                 <div className="mt-3 sm:mt-6">
@@ -72,7 +72,7 @@ export default function Testimoni({className, photo, name, testi, major, title})
                             </div>
                         </div>
                     </div>
-                    <div className="w-[80%] mx-auto text-center font-superbubble flex items-center justify-center text-[8px] sm:text-xs absolute bottom-0  left-1/2 transform -translate-x-1/2 translate-y-[-12px]">
+                    <div className="w-[80%] mx-auto text-center font-superbubble flex items-center justify-center text-[8px] sm:text-xs relative mt-1">
                         <div className="button-text-shadow bg-[#FBCC55] text-transparent z-50 relative">
                             {title}
                         </div>

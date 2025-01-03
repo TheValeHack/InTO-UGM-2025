@@ -8,20 +8,23 @@ import BubbleInput from "@/components/BubbleInput";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import PaymentPending from "@/components/PaymentPending";
 
 export default function PaketBelimo(){
-    const paket = paketData.find(item => item.id.toLowerCase() == "belimo")
-    const { data: session, status } = useSession();
-    const isLoading = status === "loading";
-    const router = useRouter();
+  const paket = paketData.find(item => item.id.toLowerCase() == "belimo")
+  const { data: session, status } = useSession();
+  const [lastOrder, setLastOrder] = useState({})
+  const [isLoadingPaymentStatus, setIsLoadingPaymentStatus] = useState(true)
+  const isLoading = status === "loading";
+  const router = useRouter();
 
-const [participants, setParticipants] = useState([
-    { name: "", school: "", email: "", phone: "" },
-    { name: "", school: "", email: "", phone: "" },
-    { name: "", school: "", email: "", phone: "" },
-    { name: "", school: "", email: "", phone: "" },
-  ]);
-  
+  const [participants, setParticipants] = useState([
+      { name: "", school: "", email: "", phone: "" },
+      { name: "", school: "", email: "", phone: "" },
+      { name: "", school: "", email: "", phone: "" },
+      { name: "", school: "", email: "", phone: "" },
+    ]);
+    
   const handleParticipantChange = (index, field, value) => {
     setParticipants((prev) => {
       const updated = [...prev];
@@ -45,27 +48,84 @@ const [participants, setParticipants] = useState([
     }
     return null;
   };
-  
 
-    useEffect(() => {
-        if (!isLoading && !session) {
-          router.push("/");
+
+  useEffect(() => {
+    if (!isLoading && !session) {
+      router.push("/");
+    }
+    const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js"
+    const clientKey = process.env.NEXT_PUBLIC_CLIENT
+    const script = document.createElement('script')
+    script.src = snapScript
+    script.setAttribute('data-client-key', clientKey)
+    script.async = true
+
+    document.body.appendChild(script)
+
+    return () => {
+      document.body.removeChild(script)
+    }
+  }, [isLoading, session, router]);
+
+  useEffect(() => {
+    const fetchTransactionDetails = async () => {
+      try {
+        const response = await fetch("/api/transactionsDetail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({}),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const transactionStatus = data.transactions.payment_status;
+
+          if (transactionStatus === "pending") {
+            setLastOrder(data.transactions)
+          } else if (transactionStatus === "paid") {
+            alert('udah beli paket')
+          }
+        } else {
+          console.log("Gagal mendapatkan status transaksi");
         }
-      }, [isLoading, session, router]);
-    
-      if (isLoading) {
-        return (
-          <></>
-        );
+        setIsLoadingPaymentStatus(false)
+      } catch (error) {
+        console.log("Terjadi kesalahan:", error);
+        setIsLoadingPaymentStatus(false)
       }
+    };
 
+    if (session) {
+      fetchTransactionDetails();
+    }
+  }, [session, router]);
+
+  if (isLoading) {
     return (
+      <></>
+    );
+  }
+
+  if (isLoadingPaymentStatus) {
+    return (
+      <></>
+    );
+  }
+
+  return (
         session && (
             <div className="w-full overflow-hidden">
               <Navbar className={'navbar'} session={session}/>
               <div className="max-w-[1950px] mx-auto flex flex-col w-screen relative">
                 <section id="paket" className="w-full min-h-[75vh] py-32 flex flex-col justify-start items-center relative">
-                    <div className="px-6 md:px-12 lg:px-16 w-full relative">
+                    {
+                      lastOrder?.payment_status == "pending" ? (
+                        <PaymentPending packageId={lastOrder?.package_id} token={lastOrder?.payment_token}  orderId={lastOrder?._id} />
+                      ) : (
+                        <div className="px-6 md:px-12 lg:px-16 w-full relative">
                         <div className="flex flex-col items-center gap-5">
                             <div className="flex flex-col items-center">
                                 <div className="w-fit text-center font-superbubble flex items-center justify-center text-3xl sm:text-4xl md:text-5xl relative">
@@ -142,6 +202,8 @@ const [participants, setParticipants] = useState([
                             validateParticipants={validateParticipants}
                             />
                     </div>
+                      )
+                    }
                 </section>
                 <Footer />
               </div>

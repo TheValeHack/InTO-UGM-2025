@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendVerificationEmail(email, token) {
-  const verificationUrl = `${process.env.NEXTAUTH_URL}/api/sendVerificationEmail?token=${token}`;
+  const verificationUrl = `${process.env.NEXTAUTH_URL}/verify-email?token=${token}`;
 
   await transporter.sendMail({
     from: process.env.EMAIL_USER,

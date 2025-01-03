@@ -6,21 +6,57 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BubbleButton from "@/components/BubbleButton";
 import paketData from "@/data/paket.json";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function PaymentSuccess() {
-  const paket = paketData.find((item) => item.id.toLowerCase() === "dewekan");
+  const urlParams = new URLSearchParams(window.location.search);
+  const order_id = urlParams.get("order_id");
+  const transaction_status = urlParams.get("transaction_status");
+  const [isLoadingPaymentStatus, setIsLoadingPaymentStatus] = useState(true)
   const { data: session, status } = useSession();
   const isLoading = status === "loading";
   const router = useRouter();
+  const fetchPaymentStatus = async () => {
+    if(transaction_status == "pending"){
+      router.back()
+    } else {
+      const response = await fetch("/api/transactionsDetail", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            order_id
+          }),
+        });
+      const data = await response.json()
+      if(response.ok){
+        if(data.transactions?.payment_status == "paid"){
+          //
+        } else {
+          router.back()
+        }
+      } else {
+        console.log(response)
+      }
+      setIsLoadingPaymentStatus(false)
+    }
+  }
 
   useEffect(() => {
     if (!isLoading && !session) {
       router.push("/");
     }
+    fetchPaymentStatus()
   }, [isLoading, session, router]);
 
   if (isLoading) {
+    return (
+      <></>
+    );
+  }
+
+  if (isLoadingPaymentStatus) {
     return (
       <></>
     );
@@ -68,7 +104,7 @@ export default function PaymentSuccess() {
                         scale={2}
                         className="text-sm sm:text-lg min-w-full py-4"
                         onClick={() => {
-
+                          router.push("/")
                         }}
                     >
                         KEMBALI KE MENU UTAMA

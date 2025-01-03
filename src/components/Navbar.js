@@ -26,10 +26,11 @@ export default function Navbar({ className, session, modalLogin, setModalLogin }
         <div className="bg-[#FBECCB] h-16 md:h-20 z-20 flex items-center rounded-br-[40px] border-[5px] border-l-0 border-[color:#6F3E1D]">
           <div className="w-full h-full bg-[#FBECCB] z-40 rounded-br-[35px] px-4 justify-center md:px-6 flex items-center">
             <Image
-              src={"/images/logo.png"}
+              src={"/images/logo-footer.png"}
               width={1000}
               height={1000}
               alt="logo"
+              unoptimized
               className="w-12 md:w-20 z-40 cursor-pointer translate-x-[-8px] md:translate-x-0"
               onClick={() => router.push("/")}
             />
@@ -100,7 +101,7 @@ export default function Navbar({ className, session, modalLogin, setModalLogin }
               </BubbleButton>
               <div style={{
                 display: dropdown ? "flex" : "none"
-              }} className="absolute bg-[#E78B55] p-1 pb-2 rounded-2xl shadow-[0px_2px_0px_#474135,inset_0px_-5px_0px_#B54E27]">
+              }} className="absolute lg:h-[0px] lg:overflow-hidden lg:w-[0px] bg-[#E78B55] p-1 pb-2 lg:p-0 rounded-2xl shadow-[0px_2px_0px_#474135,inset_0px_-5px_0px_#B54E27]">
                 <div className="bg-[#F5DFB9] flex flex-col gap-1 px-6 py-3 rounded-xl shadow-[0px_2px_5px_#474135,inset_0px_-7px_15px_#BC9D7F]">
                   <BubbleButton
                     scale={1}

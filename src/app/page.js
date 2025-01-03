@@ -125,8 +125,14 @@ export default function Home() {
                   Pijakan awal menjelajahi berbagai ilmu pengetahuan, peluang dan aspirasi luas dengan semangat Mahapatih Gadjah Mada dalam mengarungi tantangan dan asa untuk mencapai impianmu menjadi calon Gadjah Mada Muda!
                   </p>
                   <div className="flex flex-col md:flex-row gap-2 mt-6">
-                    <BubbleButton scale={2} color="default" className={'text-xl md:text-base min-w-full md:min-w-64 py-6 md:py-3'}>JELAJAHI INTO</BubbleButton>
-                    <BubbleButton scale={2} color="default" className={'text-xl md:text-base min-w-full md:min-w-64 py-6 md:py-3'}>LOGIN/MASUK</BubbleButton>
+                    <BubbleButton  scale={2} color="default" className={'text-xl md:text-base min-w-full md:min-w-64 py-6 md:py-3'} onClick={() => {router.push("/#about"); }}>JELAJAHI INTO</BubbleButton>
+                    {
+                      session?.user ?  (
+                        <BubbleButton scale={2} color="default" className={'text-xl md:text-base min-w-full md:min-w-64 py-6 md:py-3'} onClick={() => {router.push("/#paket"); }}>BELI PAKET TRYOUT</BubbleButton>
+                      ) : (
+                        <BubbleButton scale={2} color="default" className={'text-xl md:text-base min-w-full md:min-w-64 py-6 md:py-3'} onClick={() => setModalLogin(true)}>LOGIN/MASUK</BubbleButton>
+                      )
+                    }
                   </div>
               </div>
               <div className="w-full max-h-[300px] md:max-h-max md:w-[40%] flex justify-end items-end z-10 translate-x-[25%] md:translate-x-0">

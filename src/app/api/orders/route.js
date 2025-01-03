@@ -5,6 +5,7 @@ import Order from '@/models/Order';
 import Participant from '@/models/Participant';
 import Package from '@/models/Package';
 import Voucher from '@/models/Voucher';
+import Midtrans from 'midtrans-client';
 
 function generateUniqueCode() {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -28,6 +29,12 @@ async function createUniqueParticipantCode() {
   }
   return code;
 }
+
+let snap = new Midtrans.Snap({
+  isProduction: false,
+  serverKey: process.env.SECRET,
+  clientKey: process.env.NEXT_PUBLIC_CLIENT
+})
 
 export async function POST(req) {
   try {
@@ -121,12 +128,26 @@ export async function POST(req) {
       participant_ids: participants,
       voucher_code: voucher,
       total_price: totalPrice,
-      payment_status: 'pending',
     });
     await newOrder.save();
 
-    const paymentUrl = `/payment_success?orderId=${newOrder._id}`;
-    return new Response(JSON.stringify({ success: true, paymentUrl }), { status: 200 });
+    let parameter = {
+      transaction_details: {
+        order_id: newOrder._id,
+        gross_amount: newOrder.total_price
+      },
+      customer_details: {
+        first_name: session?.user?.name,
+        email: session?.user?.email
+      }
+    }
+
+    const token = await snap.createTransactionToken(parameter)
+
+    newOrder.payment_token = token;
+    await newOrder.save();
+
+    return new Response(JSON.stringify({ success: true, token }), { status: 200 });
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ error: 'Internal Server Error' }), { status: 500 });
