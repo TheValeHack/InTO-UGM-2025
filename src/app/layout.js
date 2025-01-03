@@ -1,6 +1,8 @@
 import { Montserrat } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
+import AOSProvider from "@/components/AOSProvider";
+import CustomSessionProvider from "@/components/CustomSessionProvider";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -26,7 +28,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${montserrat.variable} ${superbubble.variable} ${tropicaltides.variable} font-montserrat antialiased bg-[#E5FCFF]`}
       >
-        {children}
+        <CustomSessionProvider>
+          <AOSProvider>
+            {children}
+          </AOSProvider>
+        </CustomSessionProvider>
+        
       </body>
     </html>
   );

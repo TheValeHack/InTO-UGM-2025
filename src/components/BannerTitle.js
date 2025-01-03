@@ -6,7 +6,7 @@ export default function BannerTitle({text, className, strokeClassName, shadowCla
             <div className={cn("button-text-shadow bg-[#FAFAFA] text-transparent z-50 relative", shadowClassName)}>
                 {text}
             </div>
-            <div className={cn("title-stroke text-[#FAFAFA] absolute", strokeClassName)}>
+            <div className={cn("title-stroke text-[#FAFAFA] absolute px-16 py-8", strokeClassName)}>
                 {text}
             </div>
         </div>

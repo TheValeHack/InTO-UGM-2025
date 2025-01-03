@@ -8,7 +8,7 @@ export default function BubbleButton({children, className, onClick, scale  = 1, 
                     scale == 1 ? "min-w-24" : "min-w-52",
                     scale == 1 ? (
                         color == "red" ? "bg-[url('/images/btn_small_red.png')]" : (color == "blue" ? "bg-[url('/images/btn_small_blue.png')]" : "bg-[url('/images/btn_small_default.png')]")
-                    ) : "bg-[url('/images/btn_large_default.png')]",
+                    ) : (color == "red" ? "bg-[url('/images/btn_large_red.png')]" : "bg-[url('/images/btn_large_default.png')]"),
                     className)}
             >
                 <div className="button-stroke button-text-shadow bg-[#FAFAFA] text-transparent z-10">
