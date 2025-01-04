@@ -18,3 +18,12 @@ export async function sendVerificationEmail(email, token) {
     html: `<p>Please click the link below to verify your email:</p><a href="${verificationUrl}">${verificationUrl}</a>`
   });
 }
+
+export async function sendHtmlEmail(email, html){
+  await transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: 'Terimakasih sudah daftar',
+    html: html
+  })
+}

@@ -6,6 +6,7 @@ import Participant from '@/models/Participant';
 import Package from '@/models/Package';
 import Midtrans from 'midtrans-client';
 import { appendToSheet } from '@/lib/googleSheets';
+import { sendHtmlEmail } from '@/lib/mailer';
 
 let coreApi = new Midtrans.CoreApi({
   isProduction: false,
@@ -71,6 +72,9 @@ export async function POST(req) {
             timestamp,
           ];
           await appendToSheet(sheetName, participantData);
+
+          const html = `Halo ${participant.name}, terimakasih sudah daftar to, ini kodemu ${participant.kode}`
+          await sendHtmlEmail(participant.email, html)
         }
       } else {
         orderData.payment_status = transaction_status;
