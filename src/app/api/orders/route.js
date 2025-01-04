@@ -48,6 +48,18 @@ export async function POST(req) {
 
     await connectToDatabase();
 
+    const existingPaidOrder = await Order.findOne({
+      user_id: session.user.id,
+      payment_status: "paid",
+    });
+
+    if (existingPaidOrder) {
+      return new Response(
+        JSON.stringify({ error: 'Anda sudah membeli paket. Tidak dapat membeli paket lagi.' }),
+        { status: 400 }
+      );
+    }
+
     const selectedPackage = await Package.findOne({ name: packageName });
     if (!selectedPackage) {
       return new Response(JSON.stringify({ error: 'Paket tidak ditemukan.' }), { status: 404 });
@@ -75,6 +87,13 @@ export async function POST(req) {
       if (currentDate > validVoucher.valid_until) {
         return new Response(
           JSON.stringify({ success: false, error: "Voucher sudah kedaluwarsa." }),
+          { status: 400 }
+        );
+      }
+
+      if (packageName.toLowerCase() !== "dewekan") {
+        return new Response(
+          JSON.stringify({ success: false, error: "Voucher hanya berlaku untuk paket Dewekan." }),
           { status: 400 }
         );
       }

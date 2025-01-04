@@ -70,10 +70,12 @@ export default function PaymentPending({ token, packageId, orderId }) {
             </div>
           </div>
         </div>
-        <div className="w-full max-w-[800px] text-sm sm:text-base md:text-xl text-center font-semibold text-[#B46632]">
+        <div className="w-full max-w-[800px] text-sm sm:text-base md:text-xl text-center">
+          <div className="font-semibold text-[#B46632]">
           Pembayaran anda untuk pembelian paket {packageName || "Loading..."} belum selesai,
           silahkan lanjutkan pembayaran anda atau batalkan transaksi.
-          <div className="flex flex-col mt-5 gap-3">
+          </div>
+          <div className="flex flex-col mt-5 gap-3 [text-shadow:none] shadow-none">
             <BubbleButton
               scale={2}
               className="text-sm sm:text-lg min-w-full py-4"

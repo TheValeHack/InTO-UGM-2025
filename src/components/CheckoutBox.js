@@ -107,18 +107,29 @@ export default function CheckoutBox({ className, name, desc, price, kode, valida
             <div className="text-[10px] sm:text-base text-[#B6754C] font-medium text-justify">
               <span className="text-[#D33737] font-semibold">Paket {name}</span> berisi : {desc}
             </div>
-            <form className="w-full" onSubmit={handleVoucherSubmit}>
-              <label className="text-[10px] sm:text-base font-semibold text-[#B46632]">Masukkan Voucher</label>
-              <div className="flex">
-                <BubbleInput
-                  type="text"
-                  value={voucher}
-                  onChange={handleVoucherChange}
-                  placeholder="Kode voucher"
-                />
-              </div>
-              {voucherError && <div className="text-red-500 text-[10px] sm:text-base mt-2">{voucherError}</div>}
-            </form>
+            {
+               name == "Dewekan" && (
+                <form className="w-full" onSubmit={handleVoucherSubmit}>
+                  <label className="text-[10px] sm:text-base font-semibold text-[#B46632]">Masukkan Voucher (Opsional)</label>
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <BubbleInput
+                      type="text"
+                      value={voucher}
+                      onChange={handleVoucherChange}
+                      placeholder="Kode voucher"
+                    />
+                    <div className="w-[60px] sm:w-[80px] h-[45px] sm:h-[67px] p-[3px] sm:p-[5px] shadow-[inset_0px_0px_23.5px_6px_rgba(255,255,255,0.25)] rounded-[15px] sm:rounded-[20px] border-[3px] border-solid border-[#B77749] bg-[linear-gradient(180deg,#fbbb03_0%,#fb7f08_100%)] relative">
+                        <button type="submit" className="w-full h-full shadow-[inset_0px_0px_15px_6px_rgba(0,0,0,0.15)] bg-[#FF9B8B] rounded-[10px] sm:rounded-[15px] overflow-hidden flex items-center justify-center">                        
+                            <svg className="w-4 sm:w-5" viewBox="0 0 44 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M39.7832 13.4499L7.47128 1.56037C2.98448 -0.0906017 -0.640776 5.46951 2.67985 8.90906L8.80306 15.2516C10.1216 16.6173 10.111 18.7851 8.77922 20.1379L2.90376 26.1062C-0.456247 29.5193 3.13292 35.1217 7.63801 33.496L20.5818 28.8252L39.7566 21.9059C43.7069 20.4805 43.7244 14.9001 39.7832 13.4499Z" fill="#FBCC55" stroke="#92542C"/>
+                            </svg>
+                        </button>
+                    </div>
+                  </div>
+                  {voucherError && <div className="text-red-500 text-[10px] sm:text-base mt-2">{voucherError}</div>}
+                </form>
+               )
+            }
             <div className="w-full text-[#B46632] text-[10px] sm:text-base">
               <div className="w-full flex justify-between">
                 <div className="font-semibold">Paket {name}</div>

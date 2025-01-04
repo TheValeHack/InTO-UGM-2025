@@ -4,16 +4,16 @@ import BubbleButton from "./BubbleButton"
 export default function ModalEvent({state, setState, children}){
     return (
         <Modal state={state} setState={setState} title={'MAIN EVENT'}>
-        <div className="w-full flex justify-center">
-            <div className="w-fit text-center font-superbubble flex items-center justify-center text-sm min-[380px]:text-basesm:text-xl md:text-xl relative">
+        <div className="w-full flex flex-col items-center justify-center">
+            <div className="w-fit text-center font-superbubble flex items-center justify-center text-sm min-[380px]:text-xl md:text-3xl relative tracking-tighter">
                 <div className="button-text-shadow bg-[#FAFAFA] text-transparent z-50 relative">
-                    ADA APA DI&nbsp;
+                    ADA APA DI
                 </div>
                 <div className="title-stroke-sm text-[#FAFAFA] absolute">
-                    ADA APA DI&nbsp;
+                    ADA APA DI
                 </div>
             </div>
-            <div className="w-fit text-center font-superbubble flex items-center justify-center text-sm min-[380px]:text-base sm:text-xl md:text-xl relative">
+            <div className="w-fit text-center font-superbubble flex items-center justify-center text-sm min-[380px]:text-xl md:text-3xl relative tracking-tighter mt-[-8px]">
                 <div className="button-text-shadow bg-[#FF9B8B] text-transparent z-50 relative">
                     INTO UGM 2025
                 </div>

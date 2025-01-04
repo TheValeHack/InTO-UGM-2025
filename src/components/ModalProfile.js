@@ -49,7 +49,7 @@ export default function ModalProfile({ className, state, setState, session }) {
   return (
     <>
     <Modal title={"PROFILE"} state={state} setState={setState} className={className}>
-      <div className="flex flex-col sm:gap-3 w-full justify-center">
+      <div className="flex flex-col gap-2 sm:gap-3 w-full justify-center">
         <div className="w-full flex flex-col gap-2">
           <div className="w-full flex justify-between">
             <div className="text-[10px] sm:text-sm font-bold text-[#B46632]">Nama</div>

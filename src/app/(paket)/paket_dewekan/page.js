@@ -53,7 +53,7 @@ export default function PaketDewekan() {
           if (transactionStatus === "pending") {
             setLastOrder(data.transactions)
           } else if (transactionStatus === "paid") {
-            alert('udah beli paket')
+            router.push("/thanks")
           }
         } else {
           console.log("Gagal mendapatkan status transaksi");

@@ -12,7 +12,7 @@ export default function Paket({className, name, price, desc, onClick}){
                 <div className="bg-[#703F1E] block md:hidden text-transparent text-2xl md:text-3xl font-extrabold paket-title">
                 Rp{formatCurrency(price)}
                 </div>
-                <div className="text-xs md:text-sm mt-3 bg-[#B6754C] text-transparent paket-title">
+                <div className="text-xs md:text-sm mt-3 bg-[#B6754C] text-transparent paket-title font-semibold text-[#5B3414]">
                 {desc}
                 </div>
             </div>

@@ -39,7 +39,7 @@ export default function Navbar({ className, session, modalLogin, setModalLogin }
       </div>
 
       <div className="flex justify-center z-10 w-screen absolute border-t-[5px] border-b-[5px] border-[color:#6F3E1D] bg-[#FBECCB] py-0 md:py-2">
-        <div className="opacity-0 lg:opacity-100 flex gap-2">
+        <div className="w-[0px] opacity-0 overflow-hidden lg:w-auto lg:opacity-100 flex gap-2">
           <BubbleButton
             scale={1}
             color="default"

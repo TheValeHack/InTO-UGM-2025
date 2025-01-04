@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -53,37 +59,29 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
 }
 .button-stroke {
-  text-shadow: -1px -1px 0 #CA4508, 1px -1px 0 #CA4508, -1px 1px 0 #CA4508, 1px 1px 0 #CA4508;
+  text-shadow: -1px -1px 0 rgba(202, 69, 8, 1), 1px -1px 0 rgba(202, 69, 8, 1), -1px 1px 0 rgba(202, 69, 8, 1), 1px 1px 0 rgba(202, 69, 8, 1);
 }
 .title-stroke {
-  text-shadow: -2px -2px 0 #804922, 2px -2px 0 #804922, -2px 2px 0 #804922, 2px 2px 0 #804922;
+  text-shadow: -2px -2px 0 rgba(128, 73, 34, 1), 2px -2px 0 rgba(128, 73, 34, 1), -2px 2px 0 rgba(128, 73, 34, 1), 2px 2px 0 rgba(128, 73, 34, 1);
 }
 .title-stroke-sm {
-  text-shadow: -1px -1px 0 #804922, 1px -1px 0 #804922, -1px 1px 0 #804922, 1px 1px 0 #804922;
+  text-shadow: -1px -1px 0 rgba(128, 73, 34, 1), 1px -1px 0 rgba(128, 73, 34, 1), -1px 1px 0 rgba(128, 73, 34, 1), 1px 1px 0 rgba(128, 73, 34, 1);
 }
 .title-stroke-lg {
-  text-shadow: -3px -3px 0 #804922, 3px -3px 0 #804922, -3px 3px 0 #804922, 3px 3px 0 #804922;
+  text-shadow: -3px -3px 0 rgba(128, 73, 34, 1), 3px -3px 0 rgba(128, 73, 34, 1), -3px 3px 0 rgba(128, 73, 34, 1), 3px 3px 0 rgba(128, 73, 34, 1);
 }
 .button-text-shadow {
-  text-shadow: 2px 4px 3px rgba(0,0,0,0.25);
+  text-shadow: 2px 4px 3px rgba(0,0,0,0.15);
   -webkit-background-clip: text;
      -moz-background-clip: text;
           background-clip: text;
 }
 .ship-animate {
-	animation: ship 3s ease-in-out 10s normal forwards infinite;
+	animation: ship 5s ease-in-out normal forwards infinite;
   }
-  
-.ship-animate:hover {
-	animation: ship 3s ease-in-out 0s 1 normal forwards, 
-				ship 3s ease-in-out 10s normal forwards infinite;
-	animation-play-state: running; /* Memastikan animasi tetap berjalan */
-}
-.ship:hover {
-  animation: ship 3s ease-in-out 0s 1 normal forwards;
-}
 .awan1 {
 	animation: moveRight 10s linear infinite;
 }
@@ -100,6 +98,8 @@ body {
      -moz-background-clip: text;
           background-clip: text;
 }
+ 
+  
 @keyframes ship {
 	0%,
 	100% {

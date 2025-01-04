@@ -4,8 +4,9 @@ import Image from "next/image"
 export default function Testimoni({className, photo, name, testi, major, title}){
     return (
         <div className={cn("w-full h-full p-3 pb-[32px] sm:pb-[45px] bg-[#E78B55] flex items-start justify-center rounded-[60px] sm:rounded-[80px] shadow-[0px_5px_0px_#474135,inset_0px_-12px_0px_#B54E27] relative", className)}>
-            <div className="bg-[#F5DFB9] px-6 sm:px-8 pt-3 pb-14 sm:pb-20 w-full h-full rounded-[48px] sm:rounded-[68px] shadow-[0px_3px_10.3px_#474135,inset_0px_-13px_16.2px_#BC9D7F] relative">
-                <div className="w-full p-4 sm:p-6 aspect-square shadow-[inset_0px_0px_23.5px_6px_rgba(255,255,255,0.25)] rounded-[40px] sm:rounded-[60px] border-[5px] border-solid border-[#B77749] bg-[linear-gradient(180deg,#fbbb03_0%,#fb7f08_100%)] relative">
+            <div className="bg-[#F5DFB9] px-6 sm:px-8 pt-3 pb-9 lg:pb-20 w-full h-full rounded-[48px] sm:rounded-[68px] shadow-[0px_3px_10.3px_#474135,inset_0px_-13px_16.2px_#BC9D7F] relative">
+                <div className="w-full aspect-1">
+                <div className="w-full h-full p-4 sm:p-6 shadow-[inset_0px_0px_23.5px_6px_rgba(255,255,255,0.25)] rounded-[40px] sm:rounded-[60px] border-[5px] border-solid border-[#B77749] bg-[linear-gradient(180deg,#fbbb03_0%,#fb7f08_100%)] relative">
                     <div className="w-full h-full bg-[#EFD2A6] shadow-[inset_0px_0px_22.1px_6px_rgba(58,66,70,0.25)] rounded-[24px] sm:rounded-[44px] overflow-hidden">
                         <Image
                             src={photo}
@@ -23,6 +24,7 @@ export default function Testimoni({className, photo, name, testi, major, title})
                             {name}
                         </div>
                     </div>
+                </div>
                 </div>
                 <div className="w-fit text-center translate-y-[-35%] left-2 font-superbubble flex items-center justify-center mx-auto text-3xl sm:text-5xl lg:text-4xl xl:text-5xl absolute rotate-[160deg]">
                         <div className="button-text-shadow bg-[#FAFAFA] text-transparent z-50 relative">
