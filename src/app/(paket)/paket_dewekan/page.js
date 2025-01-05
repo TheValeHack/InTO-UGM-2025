@@ -30,7 +30,7 @@ export default function PaketDewekan() {
     if (lastOrder?.payment_status === "paid") {
       router.push("/thanks");
     }
-  }, [lastOrder, router]);
+  }, []);
 
   useEffect(() => {
     const snapScript = "https://app.midtrans.com/snap/snap.js";

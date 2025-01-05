@@ -48,7 +48,7 @@ export default function PaketBetigo() {
   };
 
   useEffect(() => {
-    if (!isLoading && !session && !isProcessing) {
+    if (!isLoading && !session) {
       router.push("/");
     }
     const snapScript = "https://app.midtrans.com/snap/snap.js";
@@ -63,17 +63,21 @@ export default function PaketBetigo() {
     return () => {
       document.body.removeChild(script);
     };
-  }, [isLoading, session, router, isProcessing]);
+  }, [isLoading, session, router]);
 
   useEffect(() => {
-    if (session) {
-      fetchTransactionDetails().then((transaction) => {
-        if (transaction?.payment_status === "paid") {
-          router.push("/thanks");
-        }
-      });
+    if (!isLoading && session && !isProcessing) {
+      fetchTransactionDetails();
+    } else if (!isLoading && !session) {
+      router.push("/");
     }
-  }, [session, fetchTransactionDetails, router]);
+  }, [isLoading, session, router, fetchTransactionDetails, isProcessing]);
+
+  useEffect(() => {
+    if (lastOrder?.payment_status === "paid") {
+      router.push("/thanks");
+    }
+  }, []);
 
   if (isLoading || isLoadingPaymentStatus) {
     return <></>;
