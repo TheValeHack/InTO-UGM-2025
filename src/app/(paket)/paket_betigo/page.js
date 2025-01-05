@@ -77,7 +77,7 @@ export default function PaketBetigo() {
     if (lastOrder?.payment_status === "paid") {
       router.push("/thanks");
     }
-  }, []);
+  }, [lastOrder]);
 
   if (isLoading || isLoadingPaymentStatus) {
     return <></>;

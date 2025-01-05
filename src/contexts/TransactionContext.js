@@ -47,7 +47,7 @@ export function TransactionProvider({ children }) {
       value={{
         lastOrder,
         isLoadingPaymentStatus,
-        isProcessing, // Tambahkan isProcessing ke context
+        isProcessing,
         fetchTransactionDetails,
       }}
     >
