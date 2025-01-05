@@ -23,10 +23,10 @@ export default function PaymentSuccess() {
   }, [isLoading, session, fetchTransactionDetails, router]);
 
   useEffect(() => {
-    if (lastOrder?.payment_status === "pending") {
+    if (lastOrder?.payment_status === "paid") {
+      //
+    } else  {
       router.back();
-    } else if (lastOrder?.payment_status !== "paid") {
-      router.push("/");
     }
   }, [lastOrder, router]);
 

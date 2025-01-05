@@ -5,7 +5,7 @@ import Order from '@/models/Order';
 import Midtrans from 'midtrans-client';
 
 let coreApi = new Midtrans.CoreApi({
-  isProduction: false,
+  isProduction: true,
   serverKey: process.env.SECRET,
   clientKey: process.env.NEXT_PUBLIC_CLIENT,
 });
