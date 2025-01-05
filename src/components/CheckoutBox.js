@@ -135,10 +135,14 @@ export default function CheckoutBox({ className, name, desc, price, kode, valida
                 <div className="font-semibold">Paket {name}</div>
                 <div className="font-extrabold">Rp{formatCurrency(price)}</div>
               </div>
-              <div className="w-full flex justify-between">
+              {
+                name == "Dewekan" && (
+                  <div className="w-full flex justify-between">
                 <div className="font-semibold">Potongan Voucher</div>
                 <div className="font-extrabold">Rp{formatCurrency(discount)}</div>
               </div>
+                )
+              }
               <div className="w-full flex justify-between mt-3">
                 <div className="font-extrabold">Total Bayar</div>
                 <div className="font-extrabold text-[#EF4223]">Rp{formatCurrency(price - discount)}</div>

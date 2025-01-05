@@ -3,7 +3,7 @@ import Modal from "./Modal"
 export default function ModalDetailPaket({className, state, setState, packageName, participants}){
     return (
         <Modal title={'DETAIL PAKET'} className={className} state={state} setState={setState}>
-                <div className="flex flex-col sm:gap-3 w-full justify-center">
+                <div className="flex flex-col gap-2 sm:gap-3 w-full justify-center">
                     <div className="w-full flex justify-between">
                         <div className="text-[10px] sm:text-sm font-bold text-[#B46632]">Paket Aktif</div>
                         <div className="text-[10px] sm:text-sm font-medium text-[#B46632]">Paket {packageName}</div>

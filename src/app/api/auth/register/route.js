@@ -5,18 +5,15 @@ import { sendVerificationEmail } from '@/lib/mailer';
 import crypto from 'crypto';
 
 export async function POST(req) {
-  const body = await req.json(); // Parse JSON body
+  const body = await req.json();
 
   const { name, email, password, school, phone } = body;
 
-  // Regular expressions for validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Valid email format
-  const phoneRegex = /^(?:\+62|0)[2-9][0-9]{7,12}$/; // Valid phone number format
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^(?:\+62|0)[2-9][0-9]{7,12}$/;
 
-  // Trim phone number and remove spaces
   const cleanedPhone = phone.replace(/\s+/g, '');
 
-  // Server-side validation
   if (!name || !email || !password || !school || !cleanedPhone) {
     return new Response(JSON.stringify({ error: 'All fields are required.' }), { status: 400 });
   }
@@ -39,22 +36,18 @@ export async function POST(req) {
   try {
     await connectToDatabase();
 
-    // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return new Response(JSON.stringify({ error: 'Email is already registered.' }), { status: 400 });
     }
 
-    // Create new user
     const newUser = new User({ name, email, password, school, phone: cleanedPhone });
     await newUser.save();
 
-    // Generate verification token
     const token = crypto.randomBytes(32).toString('hex');
     const verificationToken = new VerificationToken({ userId: newUser._id, token });
     await verificationToken.save();
 
-    // Send verification email
     await sendVerificationEmail(email, token);
 
     return new Response(

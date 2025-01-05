@@ -51,7 +51,7 @@ export default function PaketBetigo() {
     if (!isLoading && !session) {
       router.push("/");
     }
-    const snapScript = "https://app.sandbox.midtrans.com/snap/snap.js";
+    const snapScript = "https://app.midtrans.com/snap/snap.js";
     const clientKey = process.env.NEXT_PUBLIC_CLIENT;
     const script = document.createElement("script");
     script.src = snapScript;

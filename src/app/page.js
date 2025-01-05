@@ -18,10 +18,12 @@ import Modal from "@/components/Modal";
 import ModalEvent from "@/components/ModalEvent";
 import ModalEventDetail from "@/components/ModalEventDetail";
 import { useSession } from "next-auth/react";
+import ModalGuest from "@/components/ModalGuest";
 
 export default function Home() {
   const router = useRouter();
   const shipRef = useRef(null);
+  const [modalGuest, setModalGuest] = useState(true)
   const [modalEvent, setModalEvent] = useState(false)
   const [modalEventDetail1, setModalEventDetail1] = useState(false)
   const [modalEventDetail2, setModalEventDetail2] = useState(false)
@@ -64,6 +66,7 @@ export default function Home() {
   return (
     isLoading ? <></> :
     <div className="w-full overflow-hidden">
+      <ModalGuest state={modalGuest} setState={setModalGuest} />
       <ModalEvent state={modalEvent} setState={setModalEvent}>
             <BubbleButton onClick={() => setModalEventDetail1(!modalEventDetail1)} scale={2} className={'text-sm sm:text-base min-w-full'}>TRY OUT</BubbleButton>
             <BubbleButton onClick={() => setModalEventDetail2(!modalEventDetail2)} scale={2} className={'text-sm sm:text-base min-w-full'}>UNIVERSITY FAIR</BubbleButton>
@@ -301,8 +304,8 @@ export default function Home() {
                 <div data-aos="fade-up" data-aos-duration="1000" className="relative w-full md:w-[80%] lg:min-w-[650px] max-w-[950px] z-30 mx-auto" >
                   <BannerTitle text={'LOKASI TRY OUT'} className={'translate-y-[50%] mx-auto text-xl min-[380px]:text-[22px] w-[90%] md:w-fit md:text-4xl lg:text-5xl rotate-[-3deg] skew-x-3 drop-shadow-2xl px-6 py-6 md:px-16 md:py-10 z-20'} strokeClassName={'px-6 py-4 md:px-16 md:py-8'}/>
                   <Panel type={1} className={'px-8 md:px-14 md:pb-[80px] md:pt-24 flex flex-col items-center text-black'}>
-                    <div className="w-full lg:w-[80%] aspect-1 sm:h-[380px] border-[7px] border-[#9F5A2C] rounded-[50px]">
-                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3991.5609925883264!2d104.69919435145265!3d-2.916599296142193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b737f9d38bb21%3A0x879c802cb444f6a0!2sBima%20Sakti%20Convention%20Center!5e0!3m2!1sen!2sid!4v1735213966496!5m2!1sen!2sid" className="w-full h-full border-none rounded-[42px]" allowFullScreen referrerPolicy="no-referrer-when-downgrade"></iframe>
+                    <div className="w-full lg:w-[80%] aspect-1 sm:h-[380px] border-[7px] border-[#9F5A2C] rounded-[50px] overflow-hidden">
+                      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3991.5609925883264!2d104.69919435145265!3d-2.916599296142193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b737f9d38bb21%3A0x879c802cb444f6a0!2sBima%20Sakti%20Convention%20Center!5e0!3m2!1sen!2sid!4v1735213966496!5m2!1sen!2sid" className="w-full h-full  rounded-[42px]" allowFullScreen referrerPolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <div className="font-semibold text-black [text-shadow:none] mt-4 text-sm sm:text-base">Bima Sakti Convention Center</div>
                     <div className="font-medium text-black [text-shadow:none] mt-2 text-center text-sm sm:text-base">Jl. Adi Sucipto KM.11, Kebun Bunga, Kec. Sukarami, Kota Palembang, Sumatera Selatan 30961</div>

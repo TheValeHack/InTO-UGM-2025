@@ -43,3 +43,4 @@ next-env.d.ts
 
 # credentials google service account gua
 src/data/intougm2025-95a19e547c0b.json
+src/data/google-service-account.json

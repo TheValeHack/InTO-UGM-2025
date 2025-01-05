@@ -30,6 +30,8 @@ export default function PaymentSuccess() {
           }),
         });
       const data = await response.json()
+      console.log(response)
+      console.log(data)
       if(response.ok){
         if(data.transactions?.payment_status == "paid"){
           //
@@ -91,7 +93,7 @@ export default function PaymentSuccess() {
                     </div>
                   </div>
                 </div>
-                <div className="w-full max-w-[800px] text-sm sm:text-base md:text-xl text-center font-semibold text-[#B46632]">
+                <div className="w-full max-w-[800px] text-sm sm:text-base md:text-xl text-center font-semibold text-[#B46632] shadow-none drop-shadow-none [text-shadow:none]">
                     Terima kasih atas antusiasmenya dalam menyelesaikan pembayaran ini. Sampai jumpa di main event InTO UGM 2025!
                     <br/><br/>
                     Pastikan Sobat InTO telah menerima email tiket dalam 1x24 jam. Jika belum, mohon segera menghubungi contact person di bawah ini.

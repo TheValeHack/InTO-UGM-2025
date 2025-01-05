@@ -31,7 +31,7 @@ async function createUniqueParticipantCode() {
 }
 
 let snap = new Midtrans.Snap({
-  isProduction: false,
+  isProduction: true,
   serverKey: process.env.SECRET,
   clientKey: process.env.NEXT_PUBLIC_CLIENT
 })

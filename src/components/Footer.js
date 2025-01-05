@@ -12,33 +12,39 @@ export default function Footer(){
                       alt="logo footer"
                   />
                   <div className="flex justify-center items-center">
-                      <Image
-                        src="/images/instagram.png"
-                        width={1000}
-                        height={1000}
-                        alt="sosmed"
-                        className="w-7 md:w-9 cursor-pointer transition-all duration-400 hover:scale-[1.05]"
-                      />
+                      <a target="_blank" href="https://www.instagram.com/ikagamass_ugm/profilecard">
+                        <Image
+                          src="/images/instagram.png"
+                          width={1000}
+                          height={1000}
+                          alt="sosmed"
+                          className="w-7 md:w-9 cursor-pointer transition-all duration-400 hover:scale-[1.05]"
+                        />
+                      </a>
                       <div className="mx-5 text-white">
                         |
                       </div>
-                      <Image
-                        src="/images/tiktok.png"
-                        width={1000}
-                        height={1000}
-                        alt="sosmed"
-                        className="w-7 md:w-9 cursor-pointer transition-all duration-400 hover:scale-[1.05]"
-                      />
+                      <a target="_blank" href="https://www.tiktok.com/@intougm?_t=ZS-8so3DAeXWpl&_r=1">
+                        <Image
+                          src="/images/tiktok.png"
+                          width={1000}
+                          height={1000}
+                          alt="sosmed"
+                          className="w-7 md:w-9 cursor-pointer transition-all duration-400 hover:scale-[1.05]"
+                        />
+                      </a>
                       <div className="mx-5 text-white">
                         |
                       </div>
-                      <Image
-                        src="/images/x.png"
-                        width={1000}
-                        height={1000}
-                        alt="sosmed"
-                        className="w-7 md:w-9 cursor-pointer transition-all duration-400 hover:scale-[1.05]"
-                      />
+                      <a target="_blank" href="https://x.com/into_ugm?s=21">
+                        <Image
+                          src="/images/x.png"
+                          width={1000}
+                          height={1000}
+                          alt="sosmed"
+                          className="w-7 md:w-9 cursor-pointer transition-all duration-400 hover:scale-[1.05]"
+                        />
+                      </a>
                   </div>
                   <div className="flex flex-col justify-center items-center">
                       <div className="font-bold text-white  text-xs md:text-base">intougm2025@gmail.com</div>

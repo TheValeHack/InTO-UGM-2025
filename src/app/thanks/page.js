@@ -34,10 +34,10 @@ export default function PaymentSuccess() {
         if(data.transactions?.payment_status == "paid"){
           //
         } else {
-          router.back()
+          router.push("/")
         }
       } else {
-        console.log(response)
+        router.push("/")
       }
       setIsLoadingPaymentStatus(false)
     }
@@ -91,7 +91,7 @@ export default function PaymentSuccess() {
                     </div>
                   </div>
                 </div>
-                <div className="w-full max-w-[800px] text-sm sm:text-base md:text-xl text-center font-semibold text-[#B46632]">
+                <div className="w-full max-w-[800px] text-sm sm:text-base md:text-xl text-center font-semibold text-[#B46632] shadow-none drop-shadow-none [text-shadow:none]">
                     Terima kasih telah melakukan pembelian paket TO di InTO UGM 2025. Tetapi, maaf kamu hanya bisa melakukan satu kali pembelian di dalam satu akun.
                     <br/><br/>
                     <BubbleButton

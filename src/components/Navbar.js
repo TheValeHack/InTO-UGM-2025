@@ -97,7 +97,9 @@ export default function Navbar({ className, session, modalLogin, setModalLogin }
                 className={"text-xs min-w-36 md:min-w-52 translate-x-2 md:translate-x-0"}
                 onClick={() => setDropdown(!dropdown)}
               >
-                {session.user.name}
+                {session.user.name.length > 12
+              ? `${session.user.name.slice(0, 12)}...`
+              : session.user.name}
               </BubbleButton>
               <div style={{
                 display: dropdown ? "flex" : "none"

@@ -84,7 +84,7 @@ export default function ModalProfile({ className, state, setState, session }) {
         )}
         </div>
 
-        <div className="w-full flex flex-col justify-center sm:gap-4 mt-1 sm:mt-2">
+        <div className="w-full flex flex-col justify-center gap-1 sm:gap-4 mt-1 sm:mt-2">
           {
             activePackage ? (
                 <BubbleButton scale={2} color="default" className={"text-lg sm:text-xl sm:py-6 min-w-full"} onClick={() => {
@@ -114,7 +114,7 @@ export default function ModalProfile({ className, state, setState, session }) {
             }}
             scale={2}
             color="red"
-            className={"text-lg sm:text-xl py-6 min-w-full"}
+            className={"text-lg sm:text-xl sm:py-6 min-w-full"}
           >
             LOG OUT
           </BubbleButton>

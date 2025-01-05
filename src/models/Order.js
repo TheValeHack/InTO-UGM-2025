@@ -9,6 +9,7 @@ const OrderSchema = new mongoose.Schema({
   payment_status: { type: String, default: null },
   payment_token: {type: String, default: null},
   created_at: { type: Date, default: Date.now },
+  processing: { type: Boolean, default: false },
 });
 
 export default mongoose.models.Order || mongoose.model('Order', OrderSchema);

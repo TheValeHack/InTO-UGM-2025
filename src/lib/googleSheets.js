@@ -2,7 +2,7 @@ import { google } from 'googleapis';
 import path from 'path';
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: path.resolve(process.cwd(), 'src/data/intougm2025-95a19e547c0b.json'),
+  keyFile: path.resolve(process.cwd(), 'src/data/google-service-account.json'),
   scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 
