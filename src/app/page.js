@@ -37,27 +37,30 @@ export default function Home() {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (pathname === "/" && window.location.hash === "#event") {
-      const section = document.getElementById("event");
-      if (section) {
-        const sectionPosition = section.offsetTop;
-        window.scrollTo({
-          top: sectionPosition,
-          behavior: "smooth",
-        });
+    if (typeof window !== "undefined") {
+      if (pathname === "/" && window.location.hash === "#event") {
+        const section = document.getElementById("event");
+        if (section) {
+          const sectionPosition = section.offsetTop;
+          window.scrollTo({
+            top: sectionPosition,
+            behavior: "smooth",
+          });
+        }
       }
-    }
-    if (pathname === "/" && window.location.hash === "#paket") {
-      const section = document.getElementById("paket");
-      if (section) {
-        const sectionPosition = section.offsetTop;
-        window.scrollTo({
-          top: sectionPosition,
-          behavior: "smooth",
-        });
+      if (pathname === "/" && window.location.hash === "#paket") {
+        const section = document.getElementById("paket");
+        if (section) {
+          const sectionPosition = section.offsetTop;
+          window.scrollTo({
+            top: sectionPosition,
+            behavior: "smooth",
+          });
+        }
       }
     }
   }, [pathname]);
+  
 
   const event1 = eventData.find(item => item.id.toLowerCase() == "try_out")
   const event2 = eventData.find(item => item.id.toLowerCase() == "university_fair")

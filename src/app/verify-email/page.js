@@ -16,36 +16,38 @@ export default function VerifyEmailPage() {
 
   useEffect(() => {
     const verifyEmail = async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const token = urlParams.get("token");
+      if (typeof window !== "undefined") {
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get("token");
 
-      if (!token) {
-        setMessage("Invalid token.");
-        setStatus("error");
-        return;
-      }
+        if (!token) {
+          setMessage("Token tidak valid.");
+          setStatus("error");
+          return;
+        }
 
-      try {
-        const response = await fetch(`/api/sendVerificationEmail?token=${token}`);
-        console.log(response)
+        try {
+          const response = await fetch(`/api/sendVerificationEmail?token=${token}`);
+          console.log(response);
 
-        if (response.ok) {
-          const data = await response.json();
-          setMessage(data.message);
-          setStatus("success");
+          if (response.ok) {
+            const data = await response.json();
+            setMessage(data.message);
+            setStatus("success");
 
-          setTimeout(() => {
-            router.push("/");
-          }, 2000);
-        } else {
-          const errorData = await response.json();
-          setMessage(errorData.error || "An error occurred.");
+            setTimeout(() => {
+              router.push("/");
+            }, 2000);
+          } else {
+            const errorData = await response.json();
+            setMessage(errorData.error || "Terjadi kesalahan.");
+            setStatus("error");
+          }
+        } catch (error) {
+          console.log(error);
+          setMessage("Terjadi kesalahan tak terduga.");
           setStatus("error");
         }
-      } catch (error) {
-        console.log(error);
-        setMessage("An unexpected error occurred.");
-        setStatus("error");
       }
     };
 
