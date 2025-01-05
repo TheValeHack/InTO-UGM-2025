@@ -15,24 +15,6 @@ export async function appendToSheet(sheetName, values) {
 
     const authClient = await auth.getClient();
 
-    // Fetch existing data to check for duplicates
-    const existingData = await sheets.spreadsheets.values.get({
-      auth: authClient,
-      spreadsheetId,
-      range,
-    });
-
-    const existingRows = existingData.data.values || [];
-    const newIdentifier = values[0]; // Assuming the first value is a unique identifier like participant ID
-
-    // Check if the identifier already exists in the sheet
-    const isDuplicate = existingRows.some((row) => row[0] === newIdentifier);
-    if (isDuplicate) {
-      console.log('Data sudah ada di Google Sheets, tidak menambahkan ulang.');
-      return;
-    }
-
-    // Append the new data
     await sheets.spreadsheets.values.append({
       auth: authClient,
       spreadsheetId,
@@ -47,4 +29,3 @@ export async function appendToSheet(sheetName, values) {
     throw new Error('Tidak dapat menyimpan data ke Google Sheets');
   }
 }
-
