@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { createContext, useContext, useState } from "react";
 
@@ -7,8 +7,15 @@ const TransactionContext = createContext();
 export function TransactionProvider({ children }) {
   const [lastOrder, setLastOrder] = useState({});
   const [isLoadingPaymentStatus, setIsLoadingPaymentStatus] = useState(true);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const fetchTransactionDetails = async (order_id) => {
+    if (isProcessing) {
+      console.log("Transaksi sedang diproses, tunggu hingga selesai.");
+      return null;
+    }
+
+    setIsProcessing(true);
     try {
       const response = await fetch("/api/transactionsDetail", {
         method: "POST",
@@ -30,6 +37,7 @@ export function TransactionProvider({ children }) {
       console.log("Terjadi kesalahan saat memuat data transaksi:", error);
       return null;
     } finally {
+      setIsProcessing(false);
       setIsLoadingPaymentStatus(false);
     }
   };
