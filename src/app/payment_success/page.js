@@ -9,9 +9,8 @@ import paketData from "@/data/paket.json";
 import { useEffect, useState } from "react";
 
 export default function PaymentSuccess() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const order_id = urlParams.get("order_id");
-  const transaction_status = urlParams.get("transaction_status");
+  const [order_id, setOrderId] = useState(null);
+  const [transaction_status, setTransactionStatus] = useState(null);
   const [isLoadingPaymentStatus, setIsLoadingPaymentStatus] = useState(true)
   const { data: session, status } = useSession();
   const isLoading = status === "loading";
@@ -44,6 +43,14 @@ export default function PaymentSuccess() {
       setIsLoadingPaymentStatus(false)
     }
   }
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const urlParams = new URLSearchParams(window.location.search);
+      setOrderId(urlParams.get("order_id"));
+      setTransactionStatus(urlParams.get("transaction_status"));
+    }
+  }, []);
 
   useEffect(() => {
     if (!isLoading && !session) {
