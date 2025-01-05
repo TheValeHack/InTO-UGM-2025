@@ -10,17 +10,17 @@ import { useTransaction } from "@/contexts/TransactionContext";
 
 export default function Thanks() {
   const { data: session, status } = useSession();
-  const { lastOrder, isLoadingPaymentStatus, fetchTransactionDetails } = useTransaction();
+  const { lastOrder, isLoadingPaymentStatus, fetchTransactionDetails, isProcessing } = useTransaction();
   const isLoading = status === "loading";
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && session) {
+    if (!isLoading && session && !isProcessing) {
       fetchTransactionDetails();
     } else if (!isLoading && !session) {
       router.push("/");
     }
-  }, [isLoading, session, fetchTransactionDetails, router]);
+  }, [isLoading, session, fetchTransactionDetails, router, isProcessing]);
 
   useEffect(() => {
     if (lastOrder?.payment_status === "pending") {

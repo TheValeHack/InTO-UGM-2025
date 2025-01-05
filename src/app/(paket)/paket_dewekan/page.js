@@ -13,18 +13,18 @@ import PaymentPending from "@/components/PaymentPending";
 export default function PaketDewekan() {
   const paket = paketData.find((item) => item.id.toLowerCase() === "dewekan");
   const { data: session, status } = useSession();
-  const { lastOrder, isLoadingPaymentStatus, fetchTransactionDetails } =
+  const { lastOrder, isLoadingPaymentStatus, fetchTransactionDetails, isProcessing } =
     useTransaction();
   const isLoading = status === "loading";
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && session) {
+    if (!isLoading && session && !isProcessing) {
       fetchTransactionDetails();
     } else if (!isLoading && !session) {
       router.push("/");
     }
-  }, [isLoading, session, router, fetchTransactionDetails]);
+  }, [isLoading, session, router, fetchTransactionDetails, isProcessing]);
 
   useEffect(() => {
     if (lastOrder?.payment_status === "paid") {

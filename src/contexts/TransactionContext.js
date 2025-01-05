@@ -44,7 +44,12 @@ export function TransactionProvider({ children }) {
 
   return (
     <TransactionContext.Provider
-      value={{ lastOrder, isLoadingPaymentStatus, fetchTransactionDetails }}
+      value={{
+        lastOrder,
+        isLoadingPaymentStatus,
+        isProcessing, // Tambahkan isProcessing ke context
+        fetchTransactionDetails,
+      }}
     >
       {children}
     </TransactionContext.Provider>
