@@ -19,12 +19,12 @@ export default function PaketDewekan() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoading && session && !isProcessing) {
+    if (!isLoading && session && !isProcessing && isLoadingPaymentStatus) {
       fetchTransactionDetails();
     } else if (!isLoading && !session) {
       router.push("/");
     }
-  }, [isLoading, session, router, fetchTransactionDetails, isProcessing]);
+  }, [isLoading, session, router, fetchTransactionDetails, isProcessing,isLoadingPaymentStatus]);
 
   useEffect(() => {
     if (lastOrder?.payment_status === "paid") {

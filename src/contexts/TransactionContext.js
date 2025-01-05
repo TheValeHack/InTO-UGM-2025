@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useCallback } from "react";
 
 const TransactionContext = createContext();
 
@@ -9,7 +9,7 @@ export function TransactionProvider({ children }) {
   const [isLoadingPaymentStatus, setIsLoadingPaymentStatus] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const fetchTransactionDetails = async (order_id) => {
+  const fetchTransactionDetails = useCallback(async (order_id) => {
     if (isProcessing) {
       console.log("Transaksi sedang diproses, tunggu hingga selesai.");
       return null;
@@ -40,7 +40,7 @@ export function TransactionProvider({ children }) {
       setIsProcessing(false);
       setIsLoadingPaymentStatus(false);
     }
-  };
+  }, [isProcessing]);
 
   return (
     <TransactionContext.Provider
