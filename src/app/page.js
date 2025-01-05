@@ -182,7 +182,7 @@ export default function Home() {
                   className="absolute top-32 right-0 w-20 md:w-28"
               />
               <div className="px-6 md:px-12 lg:px-16 w-full z-30">
-                <Gallery className={'mx-auto'} images={['/images/1.jpg','/images/2.jpg', '/images/3.jpg', '/images/4.jpg', '/images/5.jpg']} />
+                <Gallery className={'mx-auto'} images={[{src:'/images/1.png', tag:2020},{src:'/images/2.jpg', tag:2022}, {src: '/images/3.jpg', tag:2023}, {src:'/images/4.jpg', tag:2024}, {src:'/images/5.png', tag:2025}]} />
               </div>
               <Image
                   src={'/images/flower4.png'}

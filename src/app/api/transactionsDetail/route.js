@@ -113,7 +113,7 @@ export async function POST(req) {
                   </div>
                   <p>Jika ada pertanyaan, jangan ragu untuk menghubungi kami. Semoga sukses dan sampai bertemu di tryout!</p>
                   <p>Salam hangat,</p>
-                  <p><strong>Tim INTO UGM 2024</strong></p>
+                  <p><strong>Tim InTO UGM 2025</strong></p>
                 </div>
               `;
               const text = `
@@ -125,7 +125,7 @@ export async function POST(req) {
 
               ${participant.kode}
 
-              Pastikan kamu menyimpan ID tiker ini dengan baik.
+              Pastikan kamu menyimpan ID tiket ini dengan baik.
 
               Kami juga mengundangmu untuk bergabung ke grup WhatsApp resmi kami, di mana kamu akan mendapatkan informasi dan pembaruan lebih lanjut mengenai tryout. Silakan klik tautan di bawah ini untuk bergabung:
 

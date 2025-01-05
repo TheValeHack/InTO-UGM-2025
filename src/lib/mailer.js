@@ -54,7 +54,7 @@ export async function sendHtmlEmail(email, html, text){
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
     to: email,
-    subject: 'Pendaftaran Tryout InTO UGM 2024',
+    subject: 'Pendaftaran Tryout InTO UGM 2025',
     html: html,
     text:  text
   })
