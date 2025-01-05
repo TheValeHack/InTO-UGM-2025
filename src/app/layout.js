@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import "./globals.css";
 import AOSProvider from "@/components/AOSProvider";
 import CustomSessionProvider from "@/components/CustomSessionProvider";
+import { TransactionProvider } from "@/contexts/TransactionContext";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -30,7 +31,9 @@ export default function RootLayout({ children }) {
       >
         <CustomSessionProvider>
           <AOSProvider>
-            {children}
+            <TransactionProvider>
+              {children}
+            </TransactionProvider>
           </AOSProvider>
         </CustomSessionProvider>
         
