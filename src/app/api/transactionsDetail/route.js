@@ -51,6 +51,13 @@ export async function POST(req) {
       );
     }
 
+    if(orderData?.payment_status == "paid"){
+      return new Response(
+        JSON.stringify({ success: true, transactions: orderData, order_id: orderData._id }),
+        { status: 200 }
+      );
+    }
+
     const transactionStatus = await coreApi.transaction.status(orderData._id.toString());
     const transaction_status = transactionStatus?.transaction_status;
 
