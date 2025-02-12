@@ -5,19 +5,14 @@ import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BubbleButton from "@/components/BubbleButton";
-import { useEffect } from "react";
-import { useTransaction } from "@/contexts/TransactionContext";
 
 export default function Thanks() {
-  const { data: session, status } = useSession();
-  const { lastOrder, isLoadingPaymentStatus, fetchTransactionDetails, isProcessing } = useTransaction();
-  const isLoading = status === "loading";
   const router = useRouter();
 
   return (
-    session && (
+
       <div className="w-full overflow-hidden">
-        <Navbar className={"navbar"} session={session} />
+        <Navbar className={"navbar"}/>
         <div className="max-w-[1950px] mx-auto flex flex-col w-screen relative">
           <section
             id="payment"
@@ -64,5 +59,4 @@ export default function Thanks() {
         </div>
       </div>
     )
-  );
 }
