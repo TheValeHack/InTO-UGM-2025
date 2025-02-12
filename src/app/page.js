@@ -114,13 +114,7 @@ export default function Home() {
                   </p>
                   <div className="flex flex-col md:flex-row gap-2 mt-6">
                     <BubbleButton  scale={2} color="default" className={'text-xl md:text-base min-w-full md:min-w-64 py-6 md:py-3'} onClick={() => {router.push("/#about"); }}>JELAJAHI INTO</BubbleButton>
-                    {
-                      session?.user ?  (
-                        <BubbleButton scale={2} color="default" className={'text-xl md:text-base min-w-full md:min-w-64 py-6 md:py-3'} onClick={() => {router.push("/#paket"); }}>BELI PAKET TRYOUT</BubbleButton>
-                      ) : (
-                        <BubbleButton scale={2} color="default" className={'text-xl md:text-base min-w-full md:min-w-64 py-6 md:py-3'} onClick={() => setModalLogin(true)}>LOGIN/MASUK</BubbleButton>
-                      )
-                    }
+                    <BubbleButton scale={2} color="default" className={'text-xl md:text-base min-w-full md:min-w-64 py-6 md:py-3'} onClick={() => {router.push("/#paket"); }}>BELI PAKET TRYOUT</BubbleButton>
                   </div>
               </div>
               <div className="w-full max-h-[300px] md:max-h-max translate-y-[15%] sm:translate-y-0 md:w-[40%] flex justify-end items-end z-10 translate-x-[25%] md:translate-x-0">
@@ -259,19 +253,21 @@ export default function Home() {
                 <div className="relative w-full md:w-[75%] lg:min-w-[650px] lg:w-[50%] max-w-[750px] z-30 mx-auto" data-aos="fade-up" data-aos-duration="1000">
                   <BannerTitle text={'PAKET TO'} className={'translate-y-[50%] mx-auto text-xl min-[380px]:text-[22px] w-[90%] md:w-[80%] md:text-5xl rotate-[-3deg] skew-x-3 drop-shadow-2xl px-6 py-6 md:px-12 md:py-10 z-20'} strokeClassName={'px-6 py-4 md:px-12 md:py-8'}/>
                   <Panel type={2} className={'px-6 md:px-14 md:pb-16 md:pt-24 flex flex-col gap-4'}>
-                    {
-                      paketData.map((paket, i) => (
-                        <Paket key={i} name={paket.name == "Betigo" ? "Betigo (3 Orang)" : paket.name == "Belimo" ? "Belimo (5 Orang)" : paket.name} desc={paket.desc} price={paket.price} onClick={
+                      <Paket name={"Dewekan"} desc={"Try Out, Pembahasan Try Out, University Fair, Prediksi Peluang Masuk, Live Class, Rekomendasi Jurusan, Talkshow, Konsumsi"} price={48000} onClick={
                           () => {
-                            if(session?.user){
-                              router.push(`/paket_${paket.name.toLowerCase()}`)
-                            } else {
-                              setModalLogin(true)
-                            }
+                            router.push(`/thanks-end`)
                           }
                         } />
-                      ))
-                    }
+                        <Paket name={"Betigo (3 Orang)"} desc={"Try Out, Pembahasan Try Out, University Fair, Prediksi Peluang Masuk, Live Class, Rekomendasi Jurusan, Talkshow, Konsumsi"} price={135000} onClick={
+                          () => {
+                            router.push(`/thanks-end`)
+                          }
+                        } />
+                        <Paket name={"Belimo (5 Orang)"} desc={"Try Out, Pembahasan Try Out, University Fair, Prediksi Peluang Masuk, Live Class, Rekomendasi Jurusan, Talkshow, Konsumsi"} price={220000} onClick={
+                          () => {
+                            router.push(`/thanks-end`)
+                          }
+                        } />
                   </Panel>
                 </div>
             </div>

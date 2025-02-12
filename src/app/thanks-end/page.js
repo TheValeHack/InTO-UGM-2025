@@ -14,26 +14,6 @@ export default function Thanks() {
   const isLoading = status === "loading";
   const router = useRouter();
 
-  useEffect(() => {
-    if (!isLoading && session && !isProcessing) {
-      fetchTransactionDetails();
-    } else if (!isLoading && !session) {
-      router.push("/");
-    }
-  }, [isLoading, session, fetchTransactionDetails, router, isProcessing]);
-
-  useEffect(() => {
-    if (lastOrder?.payment_status === "pending") {
-      router.back();
-    } else if (lastOrder?.payment_status !== "paid") {
-      router.push("/");
-    }
-  }, [lastOrder, router]);
-
-  if (isLoading || isLoadingPaymentStatus) {
-    return <></>;
-  }
-
   return (
     session && (
       <div className="w-full overflow-hidden">

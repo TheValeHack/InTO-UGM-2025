@@ -60,107 +60,29 @@ export default function Navbar({ className, session, modalLogin, setModalLogin }
           >
             PAKET TO
           </BubbleButton>
-          { session?.user ? (
-            <BubbleButton
-            scale={1}
-            color="blue"
-            className={"text-xs"}
-            onClick={() => {
-              setModalProfile(!modalProfile)
-            }}
-          >
-            PROFILE
-          </BubbleButton>
-          ) : (
-            <BubbleButton
-            scale={1}
-            color="blue"
-            className={"text-xs"}
-            onClick={() => {
-              setModalRegister(!modalRegister);
-            }}
-          >
-            DAFTAR
-          </BubbleButton>
-          ) }
+          <BubbleButton
+          scale={1}
+          color="blue"
+          className={"text-xs"}
+          onClick={() => {
+            router.push("/#gallery");
+          }}
+        >
+          GALERI
+        </BubbleButton>
         </div>
       </div>
 
       <div>
         <div className="bg-[#FBECCB] h-16 md:h-20 z-20 flex items-center rounded-bl-[40px] border-[5px] border-r-0 border-[color:#6F3E1D]">
           <div className="w-full h-full bg-[#FBECCB] z-40 rounded-bl-[35px] px-4 flex items-center relative">
-            {session?.user ? (
-              <div>
-                <BubbleButton
-                scale={2}
-                color="default"
-                className={"text-xs min-w-36 md:min-w-52 translate-x-2 md:translate-x-0"}
-                onClick={() => setDropdown(!dropdown)}
-              >
-                {session.user.name.length > 12
-              ? `${session.user.name.slice(0, 12)}...`
-              : session.user.name}
-              </BubbleButton>
-              <div style={{
-                display: dropdown ? "flex" : "none"
-              }} className="absolute lg:h-[0px] lg:overflow-hidden lg:w-[0px] bg-[#E78B55] p-1 pb-2 lg:p-0 rounded-2xl shadow-[0px_2px_0px_#474135,inset_0px_-5px_0px_#B54E27]">
-                <div className="bg-[#F5DFB9] flex flex-col gap-1 px-6 py-3 rounded-xl shadow-[0px_2px_5px_#474135,inset_0px_-7px_15px_#BC9D7F]">
-                  <BubbleButton
-                    scale={1}
-                    color="default"
-                    className={"text-xs"}
-                    onClick={() => {
-                      router.push("/#event");
-                    }}
-                  >
-                    ACARA
-                  </BubbleButton>
-                  <BubbleButton
-                    scale={1}
-                    color="red"
-                    className={"text-xs"}
-                    onClick={() => {
-                      router.push("/#paket");
-                    }}
-                  >
-                    PAKET TO
-                  </BubbleButton>
-                  { session?.user ? (
-                    <BubbleButton
-                    scale={1}
-                    color="blue"
-                    className={"text-xs"}
-                    onClick={() => {
-                      setModalProfile(!modalProfile)
-                    }}
-                  >
-                    PROFILE
-                  </BubbleButton>
-                  ) : (
-                    <BubbleButton
-                    scale={1}
-                    color="blue"
-                    className={"text-xs"}
-                    onClick={() => {
-                      setModalRegister(!modalRegister);
-                    }}
-                  >
-                    DAFTAR
-                  </BubbleButton>
-                  ) }
-                </div>
-              </div>
-              </div>
-            ) : (
               <BubbleButton
                 scale={2}
                 color="default"
                 className={"text-xs min-w-36 md:min-w-52 translate-x-2 md:translate-x-0"}
-                onClick={() => setModalLogin(!modalLogin)}
               >
-                LOGIN/MASUK
+                INTO
               </BubbleButton>
-            )}
           </div>
         </div>
       </div>
