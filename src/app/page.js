@@ -8,7 +8,6 @@ import { useEffect, useRef, useState } from "react";
 import Gallery from "@/components/Gallery";
 import Panel from "@/components/Panel";
 import Paket from "@/components/Paket";
-import paketData from '@/data/paket.json';
 import testiData from '@/data/testimoni.json';
 import eventData from '@/data/event.json';
 import Testimoni from "@/components/Testimoni";
@@ -30,6 +29,7 @@ export default function Home() {
   const [modalEventDetail3, setModalEventDetail3] = useState(false)
   const [modalLogin, setModalLogin] = useState(false);
 
+  const [paketData, setPaketData] = useState([]);
   const { data: session, status } = useSession();
 
   const isLoading = status === "loading";
@@ -61,6 +61,23 @@ export default function Home() {
     }
   }, [pathname]);
   
+  useEffect(() => {
+    async function fetchPaketData() {
+      try {
+        const response = await fetch("/api/all_packages");
+        if (response.ok) {
+          const data = await response.json();
+          setPaketData(data.packages);
+        } else {
+          console.error("Failed to fetch paket data");
+        }
+      } catch (error) {
+        console.error("Error fetching paket data:", error);
+      }
+    }
+
+    fetchPaketData();
+  }, []); 
 
   const event1 = eventData.find(item => item.id.toLowerCase() == "try_out")
   const event2 = eventData.find(item => item.id.toLowerCase() == "university_fair")
@@ -244,10 +261,10 @@ export default function Home() {
                   <Panel type={2} className={'px-6 md:px-14 md:pb-16 md:pt-24 flex flex-col gap-4'}>
                     {
                       paketData.map((paket, i) => (
-                        <Paket key={i} name={paket.name} desc={paket.desc} price={paket.price} onClick={
+                        <Paket key={i} name={paket.name == "Betigo" ? "Betigo (3 Orang)" : paket.name == "Belimo" ? "Belimo (5 Orang)" : paket.name} desc={paket.desc} price={paket.price} onClick={
                           () => {
                             if(session?.user){
-                              router.push(`/paket_${paket.id}`)
+                              router.push(`/paket_${paket.name.toLowerCase()}`)
                             } else {
                               setModalLogin(true)
                             }

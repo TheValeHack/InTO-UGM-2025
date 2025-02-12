@@ -2,16 +2,15 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useTransaction } from "@/contexts/TransactionContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CheckoutBox from "@/components/CheckoutBox";
-import paketData from "@/data/paket.json";
 import PaymentPending from "@/components/PaymentPending";
 
 export default function PaketDewekan() {
-  const paket = paketData.find((item) => item.id.toLowerCase() === "dewekan");
+  const [paket, setPaket] = useState([]);
   const { data: session, status } = useSession();
   const { lastOrder, isLoadingPaymentStatus, fetchTransactionDetails, isProcessing } =
     useTransaction();
@@ -41,6 +40,23 @@ export default function PaketDewekan() {
     script.async = true;
 
     document.body.appendChild(script);
+
+    async function fetchPaketData() {
+      try {
+        const response = await fetch("/api/all_packages");
+        if (response.ok) {
+          const data = await response.json();
+          const paketData = data.packages.find((item) => item.name.toLowerCase() === "dewekan");
+          setPaket(paketData);
+        } else {
+          console.error("Failed to fetch paket data");
+        }
+      } catch (error) {
+        console.error("Error fetching paket data:", error);
+      }
+    }
+
+    fetchPaketData();
 
     return () => {
       document.body.removeChild(script);

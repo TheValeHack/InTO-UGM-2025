@@ -3,7 +3,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CheckoutBox from "@/components/CheckoutBox";
-import paketData from "@/data/paket.json";
 import BubbleInput from "@/components/BubbleInput";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
@@ -12,7 +11,7 @@ import PaymentPending from "@/components/PaymentPending";
 import { useTransaction } from "@/contexts/TransactionContext";
 
 export default function PaketBelimo() {
-  const paket = paketData.find((item) => item.id.toLowerCase() === "belimo");
+  const [paket, setPaket] = useState([]);
   const { data: session, status } = useSession();
   const { lastOrder, isLoadingPaymentStatus, fetchTransactionDetails, isProcessing } = useTransaction();
   const isLoading = status === "loading";
@@ -61,6 +60,23 @@ export default function PaketBelimo() {
     script.async = true;
 
     document.body.appendChild(script);
+
+    async function fetchPaketData() {
+      try {
+        const response = await fetch("/api/all_packages");
+        if (response.ok) {
+          const data = await response.json();
+          const paketData = data.packages.find((item) => item.name.toLowerCase() === "belimo");
+          setPaket(paketData);
+        } else {
+          console.error("Failed to fetch paket data");
+        }
+      } catch (error) {
+        console.error("Error fetching paket data:", error);
+      }
+    }
+
+    fetchPaketData();
 
     return () => {
       document.body.removeChild(script);

@@ -40,12 +40,12 @@ export default function ModalGuest({ className, children, title, state, setState
             <Image
                 width={1000}
                 height={1000}
-                src={'/images/guest_star.png'}
+                src={'/images/andovi.png'}
                 alt="gues star siluet"
-                className="w-80"
+                className="w-60"
             />
-            <div className="font-medium text-2xl text-white mt-6 text-center">COMING SOON...</div>
-            <div className="font-bold text-2xl text-white text-center">Siapa Guest Star InTO UGM 2025?</div>
+            <div className="font-medium text-2xl text-white mt-6 text-center">Guest Star InTO UGM 2025!</div>
+            <div className="font-bold text-2xl text-white text-center">Andovi da Lopez</div>
         </div>
       </div>
     )
